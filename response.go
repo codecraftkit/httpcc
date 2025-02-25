@@ -1,11 +1,11 @@
-package response
+package httpcc
 
 import (
 	"encoding/json"
 	"net/http"
 )
 
-func WithJSON(w http.ResponseWriter, code int, payload interface{}) error {
+func ResponseWithJSON(w http.ResponseWriter, code int, payload interface{}) error {
 	response, err := json.Marshal(payload)
 	if err != nil {
 		return err
@@ -17,6 +17,6 @@ func WithJSON(w http.ResponseWriter, code int, payload interface{}) error {
 	return nil
 }
 
-func WithError(w http.ResponseWriter, code int, msg string) error {
+func ResponseWithError(w http.ResponseWriter, code int, msg string) error {
 	return WithJSON(w, code, map[string]string{"error": msg})
 }
